@@ -1,0 +1,800 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2018.1">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
+        <Position x="726" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <URLField>URL</URLField>
+          <OutputMode>String</OutputMode>
+          <CodePage>65001</CodePage>
+          <EncodeURLs value="False" />
+          <Headers>
+            <NameValues />
+            <Fields orderChanged="False">
+              <Field name="address" selected="False" />
+              <Field name="label" selected="False" />
+              <Field name="TransactionHash" selected="False" />
+              <Field name="addressInput" selected="False" />
+              <Field name="   api_key*   " selected="False" />
+              <Field name="URL" selected="False" />
+              <Field name="*Unknown" selected="False" />
+            </Fields>
+          </Headers>
+          <Payload>
+            <HTTPAction>GET</HTTPAction>
+            <QueryStringBodyMode>Compose</QueryStringBodyMode>
+            <ComposeNameValues />
+            <ComposeFields orderChanged="False">
+              <Field name="address" selected="False" />
+              <Field name="label" selected="False" />
+              <Field name="TransactionHash" selected="False" />
+              <Field name="addressInput" selected="False" />
+              <Field name="   api_key*   " selected="False" />
+              <Field name="URL" selected="False" />
+              <Field name="*Unknown" selected="False" />
+            </ComposeFields>
+          </Payload>
+          <UserName />
+          <Password />
+          <numConnections>2</numConnections>
+          <Timeout>600</Timeout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Download ether txs</Name>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="1" />
+          <Fields>
+            <Field name="TransactionHash" />
+            <Field name="addressInput" />
+            <Field name="Module" />
+            <Field name="Address" />
+            <Field name="Offset" />
+            <Field name="Page" />
+            <Field name="Sort" />
+            <Field name="Field7" />
+            <Field name="Field8" />
+            <Field name="Field9" />
+            <Field name="Field10" />
+            <Field name="position" />
+            <Field name="Field12" />
+            <Field name="Field13" />
+            <Field name="   api_key*   " />
+          </Fields>
+          <Data>
+            <r>
+              <c>https://api.etherscan.io/api?module=account&amp;action=txlist</c>
+              <c>&amp;address=</c>
+              <c>module=</c>
+              <c>&amp;address=</c>
+              <c>&amp;offset=</c>
+              <c>&amp;page=</c>
+              <c>&amp;sort=</c>
+              <c>&amp;blocktype=</c>
+              <c>&amp;to=</c>
+              <c>&amp;value=</c>
+              <c>&amp;data=</c>
+              <c>&amp;=</c>
+              <c>&amp;hex=</c>
+              <c>&amp;gas=</c>
+              <c>&amp;apikey=9S1331ZTFG2R6H9M3GKASXBKJ3GF23THJP</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Input parameters for URL</Name>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="870" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="address" selected="True" />
+            <SelectField field="DownloadData" selected="True" size="2147483647" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Select Download Data only</Name>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Throttle.Throttle">
+        <Position x="522" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <RecordsPerMinute>600</RecordsPerMinute>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Ethereum limits requests to 5/sec</Name>
+          <DefaultAnnotationText>600 Records per minute</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxThrottle" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.JSONParse.JSONParse">
+        <Position x="954" y="282" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <JSON_Field>DownloadData</JSON_Field>
+          <IncludeInOutput value="False" />
+          <SingleField value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJSONParse" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="150" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="50" SearchSubDirs="False" FileFormat="0">C:\Users\mgary\Downloads\labels.csv</File>
+          <FormatSpecificOptions>
+            <CodePage>28591</CodePage>
+            <Delimeter>,</Delimeter>
+            <IgnoreErrors>False</IgnoreErrors>
+            <FieldLen>254</FieldLen>
+            <AllowShareWrite>False</AllowShareWrite>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Input account numbers for URLs</Name>
+          <DefaultAnnotationText>labels.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="address" size="254" source="File: C:\Users\mgary\Downloads\labels.csv" type="V_String" />
+            <Field name="label" size="254" source="File: C:\Users\mgary\Downloads\labels.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="150" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Target_address" selected="True" />
+                <SelectField field="Target_label" selected="True" />
+                <SelectField field="Source_TransactionHash" selected="True" />
+                <SelectField field="Source_addressInput" selected="True" />
+                <SelectField field="Source_address" selected="False" rename="Source_address" />
+                <SelectField field="Source_   api_key*   " selected="True" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Create all the URLs</Name>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="258" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[TransactionHash]+[addressInput]+[address]+[   api_key*   ]" field="URL" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Create URL string</Name>
+          <AnnotationText><![CDATA[URL = [TransactionHash]+[addressInput]+[address]+[   api_key*   ]
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[URL = [TransactionHash]+[addressInput]+[address]+[   api_key*   ]
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="1038" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>REGEX_Match([JSON_Name], "\w+.\w+.\d.*")</Expression>
+          <Mode>Custom</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>
+            </Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2018-04-22 19:29:27</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2018-04-22 19:29:27</StartDate>
+              <EndDate>2018-04-22 19:29:27</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>REGEX_Match([JSON_Name], "\w+.\w+.\d.*")</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="32">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.RegEx.RegEx">
+        <Position x="1290" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Field>JSON_Name</Field>
+          <RegExExpression value="(\w+.).(\b[0-9]+).(\w+)" />
+          <CaseInsensitve value="True" />
+          <Method>ParseComplex</Method>
+          <Replace expression="">
+            <CopyUnmatched value="True" />
+          </Replace>
+          <ParseSimple>
+            <SplitToRows value="False" />
+            <RootName />
+            <NumFields value="3" />
+            <ErrorHandling>Warn</ErrorHandling>
+          </ParseSimple>
+          <ParseComplex>
+            <Field field="Result" type="V_String" size="25" />
+            <Field field="Res_num" type="Int64" size="8" />
+            <Field field="ColumnName" type="V_String" size="35" />
+          </ParseComplex>
+          <Match>
+            <Field>URL_Matched</Field>
+            <ErrorUnmatched value="False" />
+          </Match>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>RegEx Parse Json Name into 3 columns</Name>
+          <DefaultAnnotationText>Parse:
+(\w+.).(\b[0-9]+).(\w+)</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRegEx" />
+    </Node>
+    <Node ToolID="33">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+        <Position x="1434" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <GroupFields>
+            <Field field="address" />
+            <Field field="Res_num" />
+          </GroupFields>
+          <HeaderField field="ColumnName" />
+          <DataField field="JSON_ValueString" />
+          <Methods>
+            <Method method="Concat" />
+            <Separator>,</Separator>
+            <FieldSize value="2048" />
+          </Methods>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Cross Tab from rows to columns</Name>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="address" size="254" source="CrossTab:Group:Concat:" type="V_String" />
+            <Field description="RegEx: Parsed from JSON_Name" name="Res_num" source="CrossTab:Group:Concat:" type="Int64" />
+            <Field name="blockHash" size="2048" source="CrossTab:Header:ColumnName:blockHash:Concat:" type="V_WString" />
+            <Field name="blockNumber" size="2048" source="CrossTab:Header:ColumnName:blockNumber:Concat:" type="V_WString" />
+            <Field name="confirmations" size="2048" source="CrossTab:Header:ColumnName:confirmations:Concat:" type="V_WString" />
+            <Field name="contractAddress" size="2048" source="CrossTab:Header:ColumnName:contractAddress:Concat:" type="V_WString" />
+            <Field name="cumulativeGasUsed" size="2048" source="CrossTab:Header:ColumnName:cumulativeGasUsed:Concat:" type="V_WString" />
+            <Field name="from" size="2048" source="CrossTab:Header:ColumnName:from:Concat:" type="V_WString" />
+            <Field name="gas" size="2048" source="CrossTab:Header:ColumnName:gas:Concat:" type="V_WString" />
+            <Field name="gasPrice" size="2048" source="CrossTab:Header:ColumnName:gasPrice:Concat:" type="V_WString" />
+            <Field name="gasUsed" size="2048" source="CrossTab:Header:ColumnName:gasUsed:Concat:" type="V_WString" />
+            <Field name="hash" size="2048" source="CrossTab:Header:ColumnName:hash:Concat:" type="V_WString" />
+            <Field name="input" size="2048" source="CrossTab:Header:ColumnName:input:Concat:" type="V_WString" />
+            <Field name="isError" size="2048" source="CrossTab:Header:ColumnName:isError:Concat:" type="V_WString" />
+            <Field name="nonce" size="2048" source="CrossTab:Header:ColumnName:nonce:Concat:" type="V_WString" />
+            <Field name="timeStamp" size="2048" source="CrossTab:Header:ColumnName:timeStamp:Concat:" type="V_WString" />
+            <Field name="to" size="2048" source="CrossTab:Header:ColumnName:to:Concat:" type="V_WString" />
+            <Field name="transactionIndex" size="2048" source="CrossTab:Header:ColumnName:transactionIndex:Concat:" type="V_WString" />
+            <Field name="txreceipt_status" size="2048" source="CrossTab:Header:ColumnName:txreceipt_status:Concat:" type="V_WString" />
+            <Field name="value" size="2048" source="CrossTab:Header:ColumnName:value:Concat:" type="V_WString" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="address" order="Asc" />
+            <Field field="Res_num" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+    </Node>
+    <Node ToolID="34">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="1518" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File FileFormat="42" MaxRecords="">C:\Users\mgary\Documents\etherTableau3.tde</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <OutputOption>Overwrite</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Output Data to Tableau</Name>
+          <DefaultAnnotationText>etherTableau3.tde</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="35">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="1182" y="426" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\mgary\Documents\outcomeOfDownload.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Output log of each request success</Name>
+          <DefaultAnnotationText>outcomeOfDownload.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="36">
+      <GuiSettings>
+        <Position x="1326" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Please Select Fields To Sum">&lt;Field field="address"/&gt;&lt;Field field="JSON_ValueString"/&gt;&lt;Field field="ColumnName"/&gt;</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Check for duplicates</Name>
+          <DefaultAnnotationText />
+          <Left value="True" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings Macro="CReW_OnlyUnique.yxmc" />
+    </Node>
+    <Node ToolID="42">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="389" y="10.00001" width="136.4582" height="19" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Container 42</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="True" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="1">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="414" y="54" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="0">C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv</File>
+              <FormatSpecificOptions>
+                <CodePage>28591</CodePage>
+                <Delimeter>,</Delimeter>
+                <IgnoreErrors>False</IgnoreErrors>
+                <FieldLen>254</FieldLen>
+                <AllowShareWrite>False</AllowShareWrite>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Txhash" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="Blockno" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="UnixTimestamp" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="DateTime" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="From" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="To" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+                <Field name="Quantity" size="254" source="File: C:\Users\mgary\Downloads\export-token-0x08d32b0da63e2C3bcF8019c9c5d849d7a9d791e6.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="40">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="1421" y="442" width="481" height="140" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Report</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="37">
+          <GuiSettings Plugin="AlteryxReportChartGui.AlteryxReportChartGui">
+            <Position x="1710" y="498" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <ChartType>Bar</ChartType>
+              <GroupingFields orderChanged="False" />
+              <LabelField>Count</LabelField>
+              <GeneralStyles ThreeDInterior="false" GradientColoring="false" ChartSizeW="432" ChartSizeH="288" Resolution="2x (192 dpi)" ChartTitle="" ChartTitleSize="14" ChartSubTitle="" ChartSubTitleSize="12" ChartPrimaryFont="Microsoft Sans Serif" />
+              <TitleStyles ChangeTitleFont="false" ChartTitleFont="Microsoft Sans Serif" ChartTitleSize="14" ChartTitleColor="#000000" ChartTitleAlignment="Center" ChangeSubTitleFont="false" ChartSubTitleFont="Microsoft Sans Serif" ChartSubTitleSize="12" ChartSubTitleColor="#000000" SubTitleAlignment="Center" ChangeLegendTextFont="false" LegendTextFont="Microsoft Sans Serif" LegendTextSize="12" LegendTextColor="#000000" />
+              <Styles UseChartBorder="false" ChartBorderWidth="2" ChartBorderColor="#000000" UseAreaBorder="false" AreaBorderWidth="2" AreaBorderColor="#000000" ChartBGColor="#ffffff" ChartAreaBGColor="#ffffff" ChartInteriorBGColor="#ffffff" />
+              <ChartTypeStyles ShowChartLegend="true" LegendSeparateImage="false" LegendPosition="Top" LegendAlignment="Center" UseLegendBorder="false" LegendBorderWidth="2" LegendBorderColor="#000000" TransposeData="Record" ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" />
+              <YAxis YAxisLabelFont="Microsoft Sans Serif" YAxisLabelSize="8" YAxisLabelColor="#000000" YAxisTitle="" YAxisTitleFont="Microsoft Sans Serif" YAxisTitleSize="10" YAxisTitleColor="#000000" YAxisShowGrid="true" />
+              <XAxis XAxisLabelFont="Microsoft Sans Serif" XAxisLabelSize="8" XAxisLabelColor="#000000" XAxisTitle="" XAxisTitleFont="Microsoft Sans Serif" XAxisTitleSize="10" XAxisTitleColor="#000000" XAxisShowGrid="true" XPrefix="" XPostfix="" XAxisOverrideOrigin="false" XAxisCustomOrigin="0" XAxisOverrideIncrement="false" XAxisIncrement="100" XAxisOverrideBaseline="false" XAxisBaseline="0" XAxisOverrideTopline="false" XAxisTopline="1000" UseXAxisHiliteline="false" XAxisHiliteValue="0" XAxisHiliteColor="#000000" XAxisOverrideDecimalPlaces="false" XAxisNumDecimalPlaces="0" />
+              <OAxis UseOpposedAxis="false" OAxisLabelFont="Microsoft Sans Serif" OAxisLabelSize="8" OAxisLabelColor="#000000" OAxisTitle="" OAxisTitleFont="Microsoft Sans Serif" OAxisTitleSize="10" OAxisTitleColor="#000000" OAxisShowGrid="true" OPrefix="" OPostfix="" OAxisOverrideOrigin="false" OAxisCustomOrigin="0" OAxisOverrideIncrement="false" OAxisIncrement="100" OAxisOverrideBaseline="false" OAxisBaseline="0" OAxisOverrideTopline="false" OAxisTopline="1000" UseOAxisHiliteline="false" OAxisHiliteValue="0" OAxisHiliteColor="#000000" OAxisOverrideDecimalPlaces="false" OAxisNumDecimalPlaces="0" />
+              <StylesSeries1 SeriesStyleMode="Standard" ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#b30023" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" PlotOnOpposedAxis="false">
+                <SeriesFormulas NumFormulas="0" />
+              </StylesSeries1>
+              <StylesSeries2 SeriesStyleMode="Standard" ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#00488c" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" PlotOnOpposedAxis="false">
+                <SeriesFormulas NumFormulas="0" />
+              </StylesSeries2>
+              <StylesSeries3 SeriesStyleMode="Standard" ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#1e6c0b" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" PlotOnOpposedAxis="false">
+                <SeriesFormulas NumFormulas="0" />
+              </StylesSeries3>
+              <WatermarkStyles UseWatermark="None" WatermarkText="Property of Alteryx, Inc." WatermarkTextFont="Microsoft Sans Serif" WatermarkTextSize="14" WatermarkTextColor="#000000" WatermarkOpacity="60" WatermarkImage="" />
+              <AllowMultiple value="true" />
+              <CombinationChart value="false" />
+              <SeriesList numSeries="3">
+                <Series1>
+                  <Y_ValueField yValueName="BarValue" yValueDesc="Bar">Avg_gasUsed</Y_ValueField>
+                </Series1>
+                <Series2>
+                  <Y_ValueField yValueName="BarValue" yValueDesc="Bar">[None]</Y_ValueField>
+                </Series2>
+                <Series3>
+                  <Y_ValueField yValueName="BarValue" yValueDesc="Bar">[None]</Y_ValueField>
+                </Series3>
+              </SeriesList>
+              <CurrentKnownFields>
+                <Field name="Count" />
+                <Field name="Avg_gasUsed" />
+              </CurrentKnownFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Bar Chart</Name>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxReportChart.dll" EngineDllEntryPoint="AlteryxReportChartPlugin" />
+        </Node>
+        <Node ToolID="38">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="1590" y="486" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="transactionIndex" action="Count" rename="Count" />
+                <SummarizeField field="gasUsed" action="Avg" rename="Avg_gasUsed" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Summarize Data for Reports</Name>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="39">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AutoField.AutoField">
+            <Position x="1446" y="498" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Fields>
+                <Field field="address" selected="True" />
+                <Field field="blockHash" selected="True" />
+                <Field field="blockNumber" selected="True" />
+                <Field field="confirmations" selected="True" />
+                <Field field="contractAddress" selected="True" />
+                <Field field="cumulativeGasUsed" selected="True" />
+                <Field field="from" selected="True" />
+                <Field field="gas" selected="True" />
+                <Field field="gasPrice" selected="True" />
+                <Field field="gasUsed" selected="True" />
+                <Field field="hash" selected="True" />
+                <Field field="input" selected="True" />
+                <Field field="isError" selected="True" />
+                <Field field="nonce" selected="True" />
+                <Field field="timeStamp" selected="True" />
+                <Field field="to" selected="True" />
+                <Field field="transactionIndex" selected="True" />
+                <Field field="txreceipt_status" selected="True" />
+                <Field field="value" selected="True" />
+                <Field field="*Unknown" selected="True" />
+              </Fields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name><![CDATA[Reduce size and fix type of the fields ]]></Name>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="address" size="42" source="CrossTab:Group:Concat:" type="String" />
+                <Field description="RegEx: Parsed from JSON_Name" name="Res_num" source="CrossTab:Group:Concat:" type="Int64" />
+                <Field name="blockHash" size="66" source="CrossTab:Header:ColumnName:blockHash:Concat:" type="String" />
+                <Field name="blockNumber" source="CrossTab:Header:ColumnName:blockNumber:Concat:" type="Int32" />
+                <Field name="confirmations" source="CrossTab:Header:ColumnName:confirmations:Concat:" type="Int32" />
+                <Field name="contractAddress" size="42" source="CrossTab:Header:ColumnName:contractAddress:Concat:" type="V_String" />
+                <Field name="cumulativeGasUsed" source="CrossTab:Header:ColumnName:cumulativeGasUsed:Concat:" type="Int32" />
+                <Field name="from" size="42" source="CrossTab:Header:ColumnName:from:Concat:" type="String" />
+                <Field name="gas" source="CrossTab:Header:ColumnName:gas:Concat:" type="Int32" />
+                <Field name="gasPrice" source="CrossTab:Header:ColumnName:gasPrice:Concat:" type="Int64" />
+                <Field name="gasUsed" source="CrossTab:Header:ColumnName:gasUsed:Concat:" type="Int32" />
+                <Field name="hash" size="66" source="CrossTab:Header:ColumnName:hash:Concat:" type="String" />
+                <Field name="input" size="2048" source="CrossTab:Header:ColumnName:input:Concat:" type="V_String" />
+                <Field name="isError" source="CrossTab:Header:ColumnName:isError:Concat:" type="Byte" />
+                <Field name="nonce" source="CrossTab:Header:ColumnName:nonce:Concat:" type="Int32" />
+                <Field name="timeStamp" source="CrossTab:Header:ColumnName:timeStamp:Concat:" type="Int32" />
+                <Field name="to" size="42" source="CrossTab:Header:ColumnName:to:Concat:" type="String" />
+                <Field name="transactionIndex" source="CrossTab:Header:ColumnName:transactionIndex:Concat:" type="Byte" />
+                <Field name="txreceipt_status" size="1" source="CrossTab:Header:ColumnName:txreceipt_status:Concat:" type="String" />
+                <Field name="value" size="21" source="CrossTab:Header:ColumnName:value:Concat:" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAutoField" />
+        </Node>
+        <Node ToolID="41">
+          <GuiSettings Plugin="PortfolioPluginsGui.ComposerRender.PortfolioComposerRender">
+            <Position x="1818" y="498" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <TempFileType>pdf</TempFileType>
+              <BatchMode value="False" />
+              <DataField>Chart</DataField>
+              <Separator>Continuous</Separator>
+              <ShowHeader value="False" />
+              <ShowFooter value="False" />
+              <PortraitMode value="True" />
+              <PaperType Width="612" Height="792" Left="36" Right="36" Top="36" Bottom="36" />
+              <DefaultStyles>
+                <Style Name="TextStyle" FontName="Arial" FontSize="14" Justify="Left" ForeColor="#000000" Locale="1033" />
+              </DefaultStyles>
+              <PNGResolution>1</PNGResolution>
+              <PNGLargerAction>squeeze</PNGLargerAction>
+              <PNGLargerThanPageChoice>warning</PNGLargerThanPageChoice>
+              <PNGTransparentBG value="False" />
+              <PNGBackColor value="#ffffff" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Render Bar Chart</Name>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="PortfolioPluginsEngine.dll" EngineDllEntryPoint="AlteryxPortfolioComposerRenderPlugin" />
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="18" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="18" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="26" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="21" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="True" />
+      <Destination ToolID="32" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="False" />
+      <Destination ToolID="35" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="32" Connection="Output" />
+      <Destination ToolID="33" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="32" Connection="Output" />
+      <Destination ToolID="36" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="33" Connection="Output" />
+      <Destination ToolID="34" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="33" Connection="Output" />
+      <Destination ToolID="39" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="41" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="38" Connection="Output" />
+      <Destination ToolID="37" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="39" Connection="Output" />
+      <Destination ToolID="38" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="11" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>EthereumAccountDataRequest_Transform</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
